@@ -14,16 +14,16 @@ class Funcionario extends Model
     /**
      *  É possível alterar a chave primária assim:
      *  protected $primaryKey = 'nome_da_pk';
-     * 
+     *
      * Para não ser auto_increment é assim:
      * public $increment = false;
-     * 
+     *
      * Para definir o tipo:
      * protected $keyType = 'string';
-     * 
+     *
      * Para tirar os campos timestamps:
      * public $timestamps = false;
-     * 
+     *
      */
 
     protected $table = 'Funcionario';
