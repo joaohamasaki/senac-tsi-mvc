@@ -17,6 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/pelucias', function () {
+    return view('pelucias', ['nome' => 'Cliente',
+                'mostrar' => true,
+                'pelucias' => [['id' => 1,
+                                    'texto' => 'Pelúcia do Superman'],
+
+                                ['id' => 2,
+                                    'texto' => 'Pelúcia do He-man']]]);
+});
+
+
 Route::get('/avisos', function () {
-    return view('avisos');
+    return view('avisos', ['nome' => 'Joao',
+                'mostrar' => true,
+                'avisos' => [['id' => 1,
+                                'texto' => 'Feriados agora'],
+
+                            ['id' => 2,
+                                'texto' => 'Feriados semana que vem']]]);
 });
