@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,4 +37,13 @@ Route::get('/avisos', function () {
 
                             ['id' => 2,
                                 'texto' => 'Feriados semana que vem']]]);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'clientes'], function (){
+
+    Route::get('/listar', [App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
+    Route::get('/nascimento', [App\Http\Controllers\ClientesController::class, 'nascimento'])->middleware('auth');
 });
