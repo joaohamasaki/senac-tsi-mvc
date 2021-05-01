@@ -49,6 +49,20 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>X:</strong>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>X:</strong>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Perfil:</strong>
             {!! Form::select('roles[]', $roles,$clienteRole, array('class' => 'form-control','multiple')) !!}
         </div>

@@ -4,16 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Clientes extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'nome', 'endereco', 'email', 'nascimento'];
+    use HasRoles;
 
-    protected $table = 'Clientes';
+    protected $fillable = [	'id',
+							'nome',
+							'endereco',
+							'email',
+							'nascimento'];
 
-    public function vendas() {
+	protected $table = 'Clientes';
 
-        return $this->hasMany( Vendas::class, 'cliente_id');
-    }
+	public function vendas(){
+
+		return $this->hasMany( Vendas::class, 'cliente_id');
+	}
 }
