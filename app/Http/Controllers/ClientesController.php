@@ -48,9 +48,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-
-        return view('clientes.create', compact($roles));
+        return view('clientes.create');
     }
 
     /**
@@ -63,14 +61,11 @@ class ClientesController extends Controller
     {
         $this->validate($request,
                         ['nome' => 'required',
-                        'email' => 'required|email|unique:users,email',
-                        'roles' => 'required']);
+                        'email' => 'required|email|unique:users,email']);
 
         $input = $request->all();
 
-        $user = Clientes::create($input);
-
-        $user->assignRole( $request->input('roles'));
+        Clientes::create($input);
 
         return redirect()->route('clientes.index')->with('success','Cliente criado com sucesso');
     }
@@ -98,11 +93,7 @@ class ClientesController extends Controller
     {
         $cliente = Clientes::find($id);
 
-        $roles = Role::pluck('name', 'name')->all();
-
-        $clienteRole = $cliente->roles->pluck('name', 'name')->all();
-
-        return view('clientes.edit', compact('cliente', 'roles', 'clienteRole'));
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -116,18 +107,13 @@ class ClientesController extends Controller
     {
         $this->validate($request,
                         ['nome' => 'required',
-                        'email' => 'required|email|unique:users,email',
-                        'roles' => 'required']);
+                        'email' => 'required|email|unique:users,email']);
 
         $input = $request->all();
 
         $cliente = Clientes::find($id);
 
         $cliente->update($input);
-
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-        $cliente->assignRole($request->input('roles'));
 
         return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso');
     }

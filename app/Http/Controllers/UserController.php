@@ -11,6 +11,15 @@ use Hash;
 
 class UserController extends Controller
 {
+    //Essa é uma forma de controlar o acesso
+    public function __construct()
+    {
+        $this->middleware('permission:user-list',['only' => ['index','show']]);
+        $this->middleware('permission:user-create',['only' => ['create','store']]);
+        $this->middleware('permission:user-edit',['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete',['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +45,7 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name', 'name')->all();
 
-        return view('users.create', compact($roles));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -105,7 +114,7 @@ class UserController extends Controller
     {
         $this->validate($request,
                         ['name' => 'required',
-                        'email' => 'required|email|unique:users,email',
+                        'email' => 'required|email',
                         'password' => 'required|same:confirm-password',
                         'roles' => 'required']);
 
